@@ -19,5 +19,7 @@ jobs:
     # 3. Use Docker's native verification engine to check for typos
     - name: Validate Docker Compose File Syntax
       run: |
-        cd agency-site/agency-devops
-        docker compose config
+        find . -name "docker-compose.yml" -exec dirname {} \; | while read dir; do
+          echo "Checking compose file in directory: $dir"
+          cd "$dir" && docker compose config && cd -
+        done
