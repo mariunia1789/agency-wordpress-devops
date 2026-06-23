@@ -1,0 +1,23 @@
+name: DevOps Config CI
+
+# 1. Trigger this pipeline every time someone pushes to the main branch
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-config:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 2. Pull the code down into the GitHub runner machine
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # 3. Use Docker's native verification engine to check for typos
+    - name: Validate Docker Compose File Syntax
+      run: |
+        cd agency-site/agency-devops
+        docker compose config
