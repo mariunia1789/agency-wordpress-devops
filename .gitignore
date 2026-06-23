@@ -1,0 +1,11 @@
+# Ignore core WordPress files if they appear locally
+wp-admin/
+wp-includes/
+*.php
+!index.php
+
+# Ignore specific large uploads and logs
+wp-content/uploads/
+wp-content/upgrade/
+*.log
+.DS_Store
